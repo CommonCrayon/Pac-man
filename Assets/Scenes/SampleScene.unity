@@ -225,7 +225,6 @@ MonoBehaviour:
   CatDead: 0
   CatRecovering: 0
   MoveCount: 200
-  MoveSpeed: 3
 --- !u!95 &85001486
 Animator:
   serializedVersion: 5
@@ -348,7 +347,6 @@ MonoBehaviour:
   CatDead: 1
   CatRecovering: 0
   MoveCount: 300
-  MoveSpeed: 9
 --- !u!95 &373429530
 Animator:
   serializedVersion: 5
@@ -428,7 +426,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 661d460e7a807e14a9031560cdaff3e0, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 25bb2cecb9e0c3b4ea71f6b3e227d880, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -1126,7 +1124,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 5cc6f126a7adf1e45a05ddabb805af2c, type: 3}
+  m_Sprite: {fileID: 21300000, guid: f5563bbe3889d1948a204c8e9efa991e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -1254,7 +1252,6 @@ MonoBehaviour:
   CatDead: 0
   CatRecovering: 0
   MoveCount: 0
-  MoveSpeed: 3
 --- !u!95 &851878901
 Animator:
   serializedVersion: 5
@@ -1469,7 +1466,6 @@ MonoBehaviour:
   CatDead: 0
   CatRecovering: 0
   MoveCount: 0
-  MoveSpeed: 3
 --- !u!95 &994132542
 Animator:
   serializedVersion: 5
@@ -2281,7 +2277,6 @@ MonoBehaviour:
   CatDead: 0
   CatRecovering: 0
   MoveCount: 300
-  MoveSpeed: 3
 --- !u!95 &2044055701
 Animator:
   serializedVersion: 5
@@ -2357,7 +2352,6 @@ MonoBehaviour:
   CatDead: 0
   CatRecovering: 1
   MoveCount: 100
-  MoveSpeed: 3
 --- !u!212 &2050825777
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -2527,7 +2521,6 @@ MonoBehaviour:
   CatDead: 0
   CatRecovering: 0
   MoveCount: 100
-  MoveSpeed: 3
 --- !u!95 &2079852936
 Animator:
   serializedVersion: 5
