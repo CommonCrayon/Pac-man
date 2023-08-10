@@ -6,7 +6,7 @@ AnimationClip:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: PacStudentMovingUp
+  m_Name: CatRedUp
   serializedVersion: 7
   m_Legacy: 0
   m_Compressed: 0
@@ -21,11 +21,11 @@ AnimationClip:
   - serializedVersion: 2
     curve:
     - time: 0
-      value: {fileID: 21300000, guid: 7030083f8f6d9f841bd8a6160296c41d, type: 3}
+      value: {fileID: 21300000, guid: 643815acce97485429bcdf58066e6eb1, type: 3}
     - time: 0.16666667
-      value: {fileID: 21300000, guid: 6d13b1da1926bbc41b35df74397b9fa8, type: 3}
+      value: {fileID: 21300000, guid: 7e7042fb7fe9f48498117264ea2fa81e, type: 3}
     - time: 0.33333334
-      value: {fileID: 21300000, guid: 7030083f8f6d9f841bd8a6160296c41d, type: 3}
+      value: {fileID: 21300000, guid: 643815acce97485429bcdf58066e6eb1, type: 3}
     attribute: m_Sprite
     path: 
     classID: 212
@@ -48,9 +48,9 @@ AnimationClip:
       isIntCurve: 0
       isSerializeReferenceCurve: 0
     pptrCurveMapping:
-    - {fileID: 21300000, guid: 7030083f8f6d9f841bd8a6160296c41d, type: 3}
-    - {fileID: 21300000, guid: 6d13b1da1926bbc41b35df74397b9fa8, type: 3}
-    - {fileID: 21300000, guid: 7030083f8f6d9f841bd8a6160296c41d, type: 3}
+    - {fileID: 21300000, guid: 643815acce97485429bcdf58066e6eb1, type: 3}
+    - {fileID: 21300000, guid: 7e7042fb7fe9f48498117264ea2fa81e, type: 3}
+    - {fileID: 21300000, guid: 643815acce97485429bcdf58066e6eb1, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}
