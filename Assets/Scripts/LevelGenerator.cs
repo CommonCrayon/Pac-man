@@ -15,6 +15,10 @@ public class LevelGenerator : MonoBehaviour
     [SerializeField] private GameObject PowerPellet;
     [SerializeField] private GameObject TWall;
 
+
+    private Vector3 StartingPosition; 
+
+
     private int[,] levelMap =
        {
         {1,2,2,2,2,2,2,2,2,2,2,2,2,7},
@@ -35,46 +39,54 @@ public class LevelGenerator : MonoBehaviour
        };
 
 
-    private Vector3 TLPos = new Vector3(-13.5f, 14, 0);
 
     private void Start()
     {
         // Destroying Original Level Map
         Destroy(Level01);
 
+
+        StartingPosition = new Vector3((1.5f - levelMap.GetLength(0)), levelMap.GetLength(1), 0);
         // Get full level map 2d array
         int[,] fullLevelMap = CreateFullLevelMap(levelMap);
+
+
 
         // Iterate over array and place sprites
         for (int row = 0; row < fullLevelMap.GetLength(0); row++)
         {
             for (int column = 0; column < fullLevelMap.GetLength(1); column++)
             {
-                int value = fullLevelMap[row, column];
+                int spriteValue = fullLevelMap[row, column];
+
+
 
                 // Set Position
                 Vector3 pos = new Vector3(column, -row, 0);
-                pos += TLPos;
+                pos += StartingPosition;
+
+
 
                 // Check what is the value of sprites around
-                int valueUp = (row - 1 >= 0) ? fullLevelMap[row - 1, column] : 0;
-                int valueRight = (column + 1 < fullLevelMap.GetLength(1)) ? fullLevelMap[row, column + 1] : 0;
-                int valueDown = (row + 1 < fullLevelMap.GetLength(0)) ? fullLevelMap[row + 1, column] : 0;
-                int valueLeft = (column - 1 >= 0) ? fullLevelMap[row, column - 1] : 0;
+                int spriteUp = (row - 1 >= 0) ? fullLevelMap[row - 1, column] : 0;
+                int spriteRight = (column + 1 < fullLevelMap.GetLength(1)) ? fullLevelMap[row, column + 1] : 0;
+                int spriteDown = (row + 1 < fullLevelMap.GetLength(0)) ? fullLevelMap[row + 1, column] : 0;
+                int spriteLeft = (column - 1 >= 0) ? fullLevelMap[row, column - 1] : 0;
+
 
 
                 // Instantiate sprite for according value
-                if (value == 1)
+                if (spriteValue == 1)
                 {
-                    if ((valueUp == 1 || valueUp == 2) && (valueRight == 1 || valueRight == 2))
+                    if ((spriteUp == 1 || spriteUp == 2) && (spriteRight == 1 || spriteRight == 2))
                     {
                         Instantiate(OutsideCorner, pos, Quaternion.Euler(0, 0, 90));
                     }
-                    else if ((valueUp == 1 || valueUp == 2) && (valueLeft == 1 || valueLeft == 2))
+                    else if ((spriteUp == 1 || spriteUp == 2) && (spriteLeft == 1 || spriteLeft == 2))
                     {
                         Instantiate(OutsideCorner, pos, Quaternion.Euler(0, 0, 180));
                     }
-                    else if ((valueDown == 1 || valueDown == 2) && (valueLeft == 1 || valueLeft == 2))
+                    else if ((spriteDown == 1 || spriteDown == 2) && (spriteLeft == 1 || spriteLeft == 2))
                     {
                         Instantiate(OutsideCorner, pos, Quaternion.Euler(0, 0, 270));
                     }
@@ -84,9 +96,9 @@ public class LevelGenerator : MonoBehaviour
                     }
                 }
 
-                else if (value == 2)
+                else if (spriteValue == 2)
                 {
-                    if ((valueUp == 1 || valueUp == 2) && (valueDown == 1 || valueDown == 2))
+                    if ((spriteUp == 1 || spriteUp == 2) && (spriteDown == 1 || spriteDown == 2))
                     {
                         Instantiate(OutsideWall, pos, Quaternion.Euler(0, 0, 0));
                     }
@@ -96,17 +108,17 @@ public class LevelGenerator : MonoBehaviour
                     }
                 }
 
-                else if (value == 3)
+                else if (spriteValue == 3)
                 {
-                    if ((valueUp == 3 || valueUp == 4) && (valueRight == 3 || valueRight == 4))
+                    if ((spriteUp == 3 || spriteUp == 4 || spriteUp == 7) && (spriteRight == 3 || spriteRight == 4 || spriteRight == 7))
                     {
                         Instantiate(InsideCorner, pos, Quaternion.Euler(0, 0, 90));
                     }
-                    else if ((valueUp == 3 || valueUp == 4) && (valueLeft == 3 || valueLeft == 4))
+                    else if ((spriteUp == 3 || spriteUp == 4 || spriteUp == 7) && (spriteLeft == 3 || spriteLeft == 4 || spriteLeft == 7))
                     {
                         Instantiate(InsideCorner, pos, Quaternion.Euler(0, 0, 180));
                     }
-                    else if ((valueDown == 3 || valueDown == 4) && (valueLeft == 3 || valueLeft == 4))
+                    else if ((spriteDown == 3 || spriteDown == 4 || spriteDown == 7) && (spriteLeft == 3 || spriteLeft == 4 || spriteLeft == 7))
                     {
                         Instantiate(InsideCorner, pos, Quaternion.Euler(0, 0, 270));
                     }
@@ -116,9 +128,9 @@ public class LevelGenerator : MonoBehaviour
                     }
                 }
 
-                else if (value == 4)
+                else if (spriteValue == 4)
                 {
-                    if ((valueUp == 3 || valueUp == 4 || valueUp == 7) && (valueDown == 3 || valueDown == 4 || valueDown == 7))
+                    if ((spriteUp == 3 || spriteUp == 4 || spriteUp == 7) && (spriteDown == 3 || spriteDown == 4 || spriteDown == 7))
                     {
                         Instantiate(InsideWall, pos, Quaternion.Euler(0, 0, 0));
                     }
@@ -128,27 +140,27 @@ public class LevelGenerator : MonoBehaviour
                     }
                 }
 
-                else if (value == 5)
+                else if (spriteValue == 5)
                 {
                     Instantiate(NormalPellet, pos, Quaternion.identity);
                 }
 
-                else if (value == 6)
+                else if (spriteValue == 6)
                 {
                     Instantiate(PowerPellet, pos, Quaternion.identity);
                 }
 
-                else if (value == 7)
+                else if (spriteValue == 7)
                 {
-                    if (valueDown == 0 || valueDown == 5 || valueDown == 6)
+                    if (spriteDown == 0 || spriteDown == 5 || spriteDown == 6)
                     {
                         Instantiate(TWall, pos, Quaternion.Euler(0, 0, 90));
                     }
-                    else if (valueRight == 0 || valueRight == 5 || valueRight == 6)
+                    else if (spriteRight == 0 || spriteRight == 5 || spriteRight == 6)
                     {
                         Instantiate(TWall, pos, Quaternion.Euler(0, 0, 180));
                     }
-                    else if (valueUp == 0 || valueUp == 5 || valueUp == 6)
+                    else if (spriteUp == 0 || spriteUp == 5 || spriteUp == 6)
                     {
                         Instantiate(TWall, pos, Quaternion.Euler(0, 0, 270));
                     }
