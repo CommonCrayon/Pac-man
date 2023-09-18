@@ -1,0 +1,54 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &379283945028168460
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 379283945028168459}
+  - component: {fileID: 379283945028168458}
+  m_Layer: 0
+  m_Name: LevelGenerator
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &379283945028168459
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 379283945028168460}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &379283945028168458
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 379283945028168460}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c7ed65fb1027a348be3ae08add3eb63, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Level01: {fileID: 0}
+  OutsideCorner: {fileID: 4627883236497183893, guid: 551a383f975c93c48aec7a30d2debd86, type: 3}
+  OutsideWall: {fileID: 1341235780038453751, guid: fd8d748ce3942074589229dc0ba8421d, type: 3}
+  InsideCorner: {fileID: 1059990386401786364, guid: e87e3de8a5f00084bb2f421e88ff7a1e, type: 3}
+  InsideWall: {fileID: 9019174865684573888, guid: 5f1697e064607d84aaebe0492cb4cffd, type: 3}
+  NormalPellet: {fileID: 4865608321224634627, guid: efdd70a95028c974d87c4ad7877bfc41, type: 3}
+  PowerPellet: {fileID: 3217482889992591558, guid: 0a6e5ccd31c6a8f47b30e9c63408c2c9, type: 3}
+  TWall: {fileID: 1566356365600730946, guid: 362a7463fba5f794ea3402c2e5bfbc2b, type: 3}
