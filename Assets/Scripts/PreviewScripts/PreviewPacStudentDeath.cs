@@ -1,10 +1,12 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
+
+/// <summary>
+/// Play PacStudent's Death at game start
+/// </summary>
 public class PreviewPacStudentDeath : MonoBehaviour
 {
-    void Start()
+    private void Start()
     {
         GetComponent<Animator>().Play("PacStudentDeath");
     }

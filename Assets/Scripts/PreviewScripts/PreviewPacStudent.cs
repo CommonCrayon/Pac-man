@@ -1,7 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Preview the PacStudent's Movement
+/// </summary>
 public class PreviewPacStudent : MonoBehaviour
 {
     private int MoveCount = 0;

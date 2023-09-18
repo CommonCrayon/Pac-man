@@ -1,7 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Preview the Movement of Ghosts/Cats
+/// </summary>
 public class PreviewMoving : MonoBehaviour
 {
     public bool CatScared = false;
@@ -12,8 +13,10 @@ public class PreviewMoving : MonoBehaviour
 
     private void Start()
     {
-         animator = GetComponent<Animator>();
+        animator = GetComponent<Animator>();
     }
+
+
 
     private void FixedUpdate()
     {
@@ -66,4 +69,4 @@ public class PreviewMoving : MonoBehaviour
             MoveCount = 0;
         }
     }
- }
+}

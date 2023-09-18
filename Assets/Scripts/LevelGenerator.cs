@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class LevelGenerator : MonoBehaviour
 {
+    // Serialized Fields
     [SerializeField] private GameObject Level01;
 
     [SerializeField] private GameObject OutsideCorner;
@@ -13,9 +14,7 @@ public class LevelGenerator : MonoBehaviour
     [SerializeField] private GameObject TWall;
 
 
-    private Vector3 StartingPosition;
-
-
+    // Level Map
     private int[,] levelMap =
        {
         {1,2,2,2,2,2,2,2,2,2,2,2,2,7},
@@ -35,11 +34,15 @@ public class LevelGenerator : MonoBehaviour
         {0,0,0,0,0,0,5,0,0,0,4,0,0,0},
        };
 
-
+    // Private Variables
+    private Vector3 StartingPosition;
     private GameObject GeneratedLevel;
     private GameObject GeneratedPellets;
 
 
+    /// <summary>
+    /// On Awake procedurally generate the level from LevelMap
+    /// </summary>
     private void Awake()
     {
         // Destroying Original Level Map
@@ -225,11 +228,15 @@ public class LevelGenerator : MonoBehaviour
     }
 
 
-
+    /// <summary>
+    /// Check rotation for Inside Corner
+    /// Note: Probably needs to be implemented for Outside Corner
+    /// </summary>
     private void Start()
     {
         if (GeneratedLevel == null) return;
 
+        // Find every InsideCorner and redo the rotation.
         foreach (Transform obj in GeneratedLevel.transform)
         {
             if (obj.name == "InsideCorner")
@@ -239,6 +246,7 @@ public class LevelGenerator : MonoBehaviour
                 GameObject leftObj = null;
                 GameObject rightObj = null;
 
+                // Find objects that are either up, down, left or right of the Inside Corner
                 foreach (Transform obj2 in GeneratedLevel.transform)
                 {
                     if (obj2.position == obj.position + Vector3.up)
@@ -259,7 +267,7 @@ public class LevelGenerator : MonoBehaviour
                     }
                 }
 
-
+                // If only 2 objects are true and there then rotate it. Ideally this has been already done in the Awake() function
                 if (upObj != null && leftObj != null && rightObj == null && downObj == null)
                 {
                     obj.rotation = Quaternion.Euler(0, 0, 180);
@@ -278,6 +286,7 @@ public class LevelGenerator : MonoBehaviour
                 }
                 else
                 {
+                    // When there are 3 or 4 objects true, find the object that are rotated approprately and rotate the object accordingly.
                     bool up = false;
                     bool down = false;
                     bool left = false;
@@ -340,6 +349,8 @@ public class LevelGenerator : MonoBehaviour
                         }
                     }
 
+
+                    // Rotate the object
                     if (up && left)
                     {
                         obj.rotation = Quaternion.Euler(0, 0, 180);
@@ -363,7 +374,11 @@ public class LevelGenerator : MonoBehaviour
     }
 
 
-
+    /// <summary>
+    /// Takes the Top Left Quadrant and make a full level map array
+    /// </summary>
+    /// <param name="array"></param>
+    /// <returns>Full Level Map Array</returns>
     private int[,] CreateFullLevelMap(int[,] array)
     {
         int rows = array.GetLength(0);
