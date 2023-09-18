@@ -226,6 +226,144 @@ public class LevelGenerator : MonoBehaviour
 
 
 
+    private void Start()
+    {
+        if (GeneratedLevel == null) return;
+
+        foreach (Transform obj in GeneratedLevel.transform)
+        {
+            if (obj.name == "InsideCorner")
+            {
+                GameObject upObj = null;
+                GameObject downObj = null;
+                GameObject leftObj = null;
+                GameObject rightObj = null;
+
+                foreach (Transform obj2 in GeneratedLevel.transform)
+                {
+                    if (obj2.position == obj.position + Vector3.up)
+                    {
+                        upObj = obj2.gameObject;
+                    }
+                    else if (obj2.position == obj.position + Vector3.down)
+                    {
+                        downObj = obj2.gameObject;
+                    }
+                    else if (obj2.position == obj.position + Vector3.left)
+                    {
+                        leftObj = obj2.gameObject;
+                    }
+                    else if (obj2.position == obj.position + Vector3.right)
+                    {
+                        rightObj = obj2.gameObject;
+                    }
+                }
+
+
+                if (upObj != null && leftObj != null && rightObj == null && downObj == null)
+                {
+                    obj.rotation = Quaternion.Euler(0, 0, 180);
+                }
+                else if (upObj != null && rightObj != null && leftObj == null && downObj == null)
+                {
+                    obj.rotation = Quaternion.Euler(0, 0, 90);
+                }
+                else if (downObj != null && leftObj != null && rightObj == null && upObj == null)
+                {
+                    obj.rotation = Quaternion.Euler(0, 0, 270);
+                }
+                else if (downObj != null && rightObj != null && leftObj == null && upObj == null)
+                {
+                    obj.rotation = Quaternion.Euler(0, 0, 0);
+                }
+                else
+                {
+                    bool up = false;
+                    bool down = false;
+                    bool left = false;
+                    bool right = false;
+
+
+                    if (upObj != null)
+                    {
+                        if (upObj.name == "InsideWall" && (upObj.transform.rotation.eulerAngles == new Vector3(0, 0, 0) || upObj.transform.rotation.eulerAngles == new Vector3(0, 0, 270)))
+                        {
+                            up = true;
+                            obj.name = up.ToString();
+                        }
+                        else if (upObj.name == "InsideCorner" && (upObj.transform.rotation.eulerAngles == new Vector3(0, 0, 90) || upObj.transform.rotation.eulerAngles == new Vector3(0, 0, 0)))
+                        {
+                            up = true;
+                            obj.name = up.ToString();
+                        }
+                    }
+
+                    if (downObj != null && up == false)
+                    {
+                        if (downObj.name == "InsideWall" && (downObj.transform.rotation.eulerAngles == new Vector3(0, 0, 0) || downObj.transform.rotation.eulerAngles == new Vector3(0, 0, 180)))
+                        {
+                            down = true;
+                            obj.name = down.ToString();
+                        }
+                        else if (downObj.name == "InsideCorner" && (downObj.transform.rotation.eulerAngles == new Vector3(0, 0, 90) || downObj.transform.rotation.eulerAngles == new Vector3(0, 0, 180)))
+                        {
+                            down = true;
+                            obj.name = down.ToString();
+                        }
+                    }
+
+                    if (leftObj != null)
+                    {
+                        if (leftObj.name == "InsideWall" && (leftObj.transform.rotation.eulerAngles == new Vector3(0, 0, 90) || leftObj.transform.rotation.eulerAngles == new Vector3(0, 0, 270)))
+                        {
+                            left = true;
+                            obj.name = left.ToString();
+                        }
+                        else if (leftObj.name == "InsideCorner" && (leftObj.transform.rotation.eulerAngles == new Vector3(0, 0, 180) || leftObj.transform.rotation.eulerAngles == new Vector3(0, 0, 270)))
+                        {
+                            left = true;
+                            obj.name = left.ToString();
+                        }
+                    }
+
+                    if (rightObj != null && left == false)
+                    {
+                        if (rightObj.name == "InsideWall" && (rightObj.transform.rotation.eulerAngles == new Vector3(0, 0, 90) || rightObj.transform.rotation.eulerAngles == new Vector3(0, 0, 270)))
+                        {
+                            right = true;
+                            obj.name = right.ToString();
+                        }
+                        else if (rightObj.name == "InsideCorner" && (rightObj.transform.rotation.eulerAngles == new Vector3(0, 0, 0) || rightObj.transform.rotation.eulerAngles == new Vector3(0, 0, 90)))
+                        {
+                            right = true;
+                            obj.name = right.ToString();
+                        }
+                    }
+
+                    if (up && left)
+                    {
+                        obj.rotation = Quaternion.Euler(0, 0, 180);
+                    }
+                    else if (up && right)
+                    {
+                        obj.rotation = Quaternion.Euler(0, 0, 90);
+                    }
+                    else if (down && left)
+                    {
+                        obj.rotation = Quaternion.Euler(0, 0, 270);
+                    }
+                    else if (down && right)
+                    {
+                        obj.rotation = Quaternion.Euler(0, 0, 0);
+                    }
+
+                }
+            }
+        }
+    }
+
+
+
     private int[,] CreateFullLevelMap(int[,] array)
     {
         int rows = array.GetLength(0);
