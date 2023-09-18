@@ -1,6 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class LevelGenerator : MonoBehaviour
@@ -16,7 +13,7 @@ public class LevelGenerator : MonoBehaviour
     [SerializeField] private GameObject TWall;
 
 
-    private Vector3 StartingPosition; 
+    private Vector3 StartingPosition;
 
 
     private int[,] levelMap =
@@ -39,12 +36,22 @@ public class LevelGenerator : MonoBehaviour
        };
 
 
+    private GameObject GeneratedLevel;
+    private GameObject GeneratedPellets;
 
-    private void Start()
+
+    private void Awake()
     {
         // Destroying Original Level Map
         Destroy(Level01);
 
+
+        // Defining Parents to Instantiate
+        GeneratedLevel = new GameObject();
+        GeneratedLevel.name = "GeneratedLevel";
+
+        GeneratedPellets = new GameObject();
+        GeneratedPellets.name = "GeneratedPellets";
 
         StartingPosition = new Vector3((1.5f - levelMap.GetLength(0)), levelMap.GetLength(1), 0);
         // Get full level map 2d array
@@ -76,97 +83,141 @@ public class LevelGenerator : MonoBehaviour
 
 
                 // Instantiate sprite for according value
+
+                // For Outside Corner
                 if (spriteValue == 1)
                 {
                     if ((spriteUp == 1 || spriteUp == 2) && (spriteRight == 1 || spriteRight == 2))
                     {
-                        Instantiate(OutsideCorner, pos, Quaternion.Euler(0, 0, 90));
+                        GameObject oc = Instantiate(OutsideCorner, pos, Quaternion.Euler(0, 0, 90));
+                        oc.name = "OutsideCorner";
+                        oc.transform.parent = GeneratedLevel.transform;
                     }
                     else if ((spriteUp == 1 || spriteUp == 2) && (spriteLeft == 1 || spriteLeft == 2))
                     {
-                        Instantiate(OutsideCorner, pos, Quaternion.Euler(0, 0, 180));
+                        GameObject oc = Instantiate(OutsideCorner, pos, Quaternion.Euler(0, 0, 180));
+                        oc.name = "OutsideCorner";
+                        oc.transform.parent = GeneratedLevel.transform;
                     }
                     else if ((spriteDown == 1 || spriteDown == 2) && (spriteLeft == 1 || spriteLeft == 2))
                     {
-                        Instantiate(OutsideCorner, pos, Quaternion.Euler(0, 0, 270));
+                        GameObject oc = Instantiate(OutsideCorner, pos, Quaternion.Euler(0, 0, 270));
+                        oc.name = "OutsideCorner";
+                        oc.transform.parent = GeneratedLevel.transform;
                     }
                     else
                     {
-                        Instantiate(OutsideCorner, pos, Quaternion.Euler(0, 0, 0));
+                        GameObject oc = Instantiate(OutsideCorner, pos, Quaternion.Euler(0, 0, 0));
+                        oc.name = "OutsideCorner";
+                        oc.transform.parent = GeneratedLevel.transform;
                     }
                 }
 
+                // For Outside Wall
                 else if (spriteValue == 2)
                 {
                     if ((spriteUp == 1 || spriteUp == 2) && (spriteDown == 1 || spriteDown == 2))
                     {
-                        Instantiate(OutsideWall, pos, Quaternion.Euler(0, 0, 0));
+                        GameObject ow = Instantiate(OutsideWall, pos, Quaternion.Euler(0, 0, 0));
+                        ow.name = "OutsideWall";
+                        ow.transform.parent = GeneratedLevel.transform;
                     }
                     else
                     {
-                        Instantiate(OutsideWall, pos, Quaternion.Euler(0, 0, 90));
+                        GameObject ow = Instantiate(OutsideWall, pos, Quaternion.Euler(0, 0, 90));
+                        ow.name = "OutsideWall";
+                        ow.transform.parent = GeneratedLevel.transform;
                     }
                 }
 
+                // For Inside Corner
                 else if (spriteValue == 3)
                 {
                     if ((spriteUp == 3 || spriteUp == 4 || spriteUp == 7) && (spriteRight == 3 || spriteRight == 4 || spriteRight == 7))
                     {
-                        Instantiate(InsideCorner, pos, Quaternion.Euler(0, 0, 90));
+                        GameObject ic = Instantiate(InsideCorner, pos, Quaternion.Euler(0, 0, 90));
+                        ic.name = "InsideCorner";
+                        ic.transform.parent = GeneratedLevel.transform;
                     }
                     else if ((spriteUp == 3 || spriteUp == 4 || spriteUp == 7) && (spriteLeft == 3 || spriteLeft == 4 || spriteLeft == 7))
                     {
-                        Instantiate(InsideCorner, pos, Quaternion.Euler(0, 0, 180));
+                        GameObject ic = Instantiate(InsideCorner, pos, Quaternion.Euler(0, 0, 180));
+                        ic.name = "InsideCorner";
+                        ic.transform.parent = GeneratedLevel.transform;
                     }
                     else if ((spriteDown == 3 || spriteDown == 4 || spriteDown == 7) && (spriteLeft == 3 || spriteLeft == 4 || spriteLeft == 7))
                     {
-                        Instantiate(InsideCorner, pos, Quaternion.Euler(0, 0, 270));
+                        GameObject ic = Instantiate(InsideCorner, pos, Quaternion.Euler(0, 0, 270));
+                        ic.name = "InsideCorner";
+                        ic.transform.parent = GeneratedLevel.transform;
                     }
                     else
                     {
-                        Instantiate(InsideCorner, pos, Quaternion.Euler(0, 0, 0));
+                        GameObject ic = Instantiate(InsideCorner, pos, Quaternion.Euler(0, 0, 0));
+                        ic.name = "InsideCorner";
+                        ic.transform.parent = GeneratedLevel.transform;
                     }
                 }
 
+                // For Inside Wall
                 else if (spriteValue == 4)
                 {
                     if ((spriteUp == 3 || spriteUp == 4 || spriteUp == 7) && (spriteDown == 3 || spriteDown == 4 || spriteDown == 7))
                     {
-                        Instantiate(InsideWall, pos, Quaternion.Euler(0, 0, 0));
+                        GameObject iw = Instantiate(InsideWall, pos, Quaternion.Euler(0, 0, 0));
+                        iw.name = "InsideWall";
+                        iw.transform.parent = GeneratedLevel.transform;
                     }
                     else
                     {
-                        Instantiate(InsideWall, pos, Quaternion.Euler(0, 0, 90));
+                        GameObject iw = Instantiate(InsideWall, pos, Quaternion.Euler(0, 0, 90));
+                        iw.name = "InsideWall";
+                        iw.transform.parent = GeneratedLevel.transform;
                     }
                 }
 
+                // For Normal Pellets
                 else if (spriteValue == 5)
                 {
-                    Instantiate(NormalPellet, pos, Quaternion.identity);
+                    GameObject np = Instantiate(NormalPellet, pos, Quaternion.identity);
+                    np.name = "NormalPellet";
+                    np.transform.parent = GeneratedPellets.transform;
                 }
 
+                // For Power Pellets
                 else if (spriteValue == 6)
                 {
-                    Instantiate(PowerPellet, pos, Quaternion.identity);
+                    GameObject pp = Instantiate(PowerPellet, pos, Quaternion.identity);
+                    pp.name = "PowerPellet";
+                    pp.transform.parent = GeneratedPellets.transform;
                 }
 
+                // For T Wall
                 else if (spriteValue == 7)
                 {
                     if (spriteDown == 0 || spriteDown == 5 || spriteDown == 6)
                     {
-                        Instantiate(TWall, pos, Quaternion.Euler(0, 0, 90));
+                        GameObject tw = Instantiate(TWall, pos, Quaternion.Euler(0, 0, 90));
+                        tw.name = "TWall";
+                        tw.transform.parent = GeneratedLevel.transform;
                     }
                     else if (spriteRight == 0 || spriteRight == 5 || spriteRight == 6)
                     {
-                        Instantiate(TWall, pos, Quaternion.Euler(0, 0, 180));
+                        GameObject tw = Instantiate(TWall, pos, Quaternion.Euler(0, 0, 180));
+                        tw.name = "TWall";
+                        tw.transform.parent = GeneratedLevel.transform;
                     }
                     else if (spriteUp == 0 || spriteUp == 5 || spriteUp == 6)
                     {
-                        Instantiate(TWall, pos, Quaternion.Euler(0, 0, 270));
+                        GameObject tw = Instantiate(TWall, pos, Quaternion.Euler(0, 0, 270));
+                        tw.name = "TWall";
+                        tw.transform.parent = GeneratedLevel.transform;
                     }
                     else
                     {
-                        Instantiate(TWall, pos, Quaternion.Euler(0, 0, 0));
+                        GameObject tw = Instantiate(TWall, pos, Quaternion.Euler(0, 0, 0));
+                        tw.name = "TWall";
+                        tw.transform.parent = GeneratedLevel.transform;
                     }
                 }
             }
