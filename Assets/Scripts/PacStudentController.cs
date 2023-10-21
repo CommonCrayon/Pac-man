@@ -1,4 +1,5 @@
 using System.Collections;
+using TMPro;
 using UnityEngine;
 
 public class PacStudentController : MonoBehaviour
@@ -8,13 +9,17 @@ public class PacStudentController : MonoBehaviour
 
     private Vector3 targetPosition;
     private Vector3 currentPosition;
-    private Vector3 previousPosition;
 
     private Vector3 playerInput = Vector3.zero;
+    private Vector3 lastInput = Vector3.zero;
 
     private Animator animator;
-    private AudioSource audioSource;
-    private ParticleSystem smokeParticleSystem;
+
+    [SerializeField] private AudioSource playerWalkingAS;
+    [SerializeField] private ParticleSystem smokePS;
+
+    [SerializeField] private AudioSource wallCollideAS;
+    [SerializeField] private ParticleSystem wallCollidePS;
 
     private void Start()
     {
@@ -22,8 +27,10 @@ public class PacStudentController : MonoBehaviour
         targetPosition = currentPosition;
 
         animator = GetComponent<Animator>();
-        audioSource = GetComponent<AudioSource>();
-        smokeParticleSystem = GetComponent<ParticleSystem>();
+
+        playerWalkingAS.Stop();
+        smokePS.Stop();
+        animator.SetBool("Lerping", false);
     }
 
     private void Update()
@@ -49,54 +56,32 @@ public class PacStudentController : MonoBehaviour
         {
             // Calculate the new target position
             targetPosition = GetTargetPosition(currentPosition + playerInput);
+            Vector3 lastInputTargetPosition = GetTargetPosition(currentPosition + lastInput);
 
-            // If wall in the way
+
+            // If wall is in the way
             if (ValidateTargetPosition(targetPosition))
             {
                 StartCoroutine(LerpToTarget(targetPosition));
+                lastInput = playerInput;
 
-                // Update Animations, Audio and Particles
-                if (!animator.GetBool("Lerping"))
-                {
-                    animator.SetBool("Lerping", true);
-                }
-
-                if (!audioSource.isPlaying)
-                {
-                    audioSource.Play();
-                }
-
-                if (!smokeParticleSystem.isPlaying)
-                {
-                    smokeParticleSystem.Play();
-                }
+                StartMovingPacStudent();
             }
+            else if (ValidateTargetPosition(lastInputTargetPosition))
+            {
+                targetPosition = lastInputTargetPosition;
+
+                StartCoroutine(LerpToTarget(targetPosition));
+                playerInput = lastInput;
+
+                StartMovingPacStudent();
+            }
+            // When player is forced to stop
             else
             {
-                // Update Animations, Audio and Particles
-                if (animator.GetBool("Lerping"))
-                {
-                    animator.SetBool("Lerping", false);
-                }
-
-                if (audioSource.isPlaying)
-                {
-                    audioSource.Stop();
-                }
-
-                if (smokeParticleSystem.isPlaying)
-                {
-                    smokeParticleSystem.Stop();
-                }
+                StopMovingPacStudent();
             }
         }
-
-
-        // Calculate the speed based on the distance traveled during lerping
-        float speed = Vector3.Distance(previousPosition, transform.position) / Time.deltaTime;
-
-        // Update the previous position
-        previousPosition = transform.position;
     }
 
 
@@ -141,13 +126,26 @@ public class PacStudentController : MonoBehaviour
 
     private bool ValidateTargetPosition(Vector3 targetPosition)
     {
-        if (Input.GetKey(KeyCode.Space)) // TODO: Replace with wall collision code
+        Ray ray = new Ray(currentPosition, (targetPosition - currentPosition).normalized);
+        RaycastHit hitInfo;
+
+        if (Physics.Raycast(ray, out hitInfo, 1))
         {
-            return false;
+            if (hitInfo.collider.CompareTag("Wall"))
+            {
+                // Play wall collision sounds and particles immediately
+                if (!wallCollideAS.isPlaying)
+                    wallCollideAS.Play();
+
+                if (!wallCollidePS.isPlaying)
+                    wallCollidePS.Emit(25);
+
+                // Hit wall so return false
+                return false;
+            }
         }
         return true;
     }
-
 
 
     /// <summary>
@@ -164,5 +162,51 @@ public class PacStudentController : MonoBehaviour
             transform.rotation = Quaternion.Euler(0, 0, 180);
         else if (direction.y > 0.25)
             transform.rotation = Quaternion.Euler(0, 0, 0);
+    }
+
+
+    private void StartMovingPacStudent()
+    {
+        // Play wall collision sounds and particles immediately
+        if (wallCollideAS.isPlaying)
+            wallCollideAS.Stop();
+
+        if (wallCollidePS.isPlaying)
+            wallCollidePS.Stop();
+
+        // Update Animations, Audio and Particles
+        if (!animator.GetBool("Lerping"))
+        {
+            animator.SetBool("Lerping", true);
+        }
+
+        if (!playerWalkingAS.isPlaying)
+        {
+            playerWalkingAS.Play();
+        }
+
+        if (!smokePS.isPlaying)
+        {
+            smokePS.Play();
+        }
+    }
+
+    private void StopMovingPacStudent()
+    {
+        // Update Animations, Audio and Particles
+        if (animator.GetBool("Lerping"))
+        {
+            animator.SetBool("Lerping", false);
+        }
+
+        if (playerWalkingAS.isPlaying)
+        {
+            playerWalkingAS.Stop();
+        }
+
+        if (smokePS.isPlaying)
+        {
+            smokePS.Stop();
+        }
     }
 }
