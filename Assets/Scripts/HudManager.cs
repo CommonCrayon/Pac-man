@@ -11,6 +11,7 @@ public class HudManager : MonoBehaviour
     [SerializeField] private TMP_Text GameTimerText;
     [SerializeField] private TMP_Text GhostScaredTimerText;
 
+    private float ghostScaredTimer = 0;
 
     public void SetLives(int noOfLives)
     {
@@ -50,4 +51,21 @@ public class HudManager : MonoBehaviour
         SceneManager.LoadScene(0);
     }
 
+    public void UpdateGhostScaredTimer(float timerValue)
+    {
+        ghostScaredTimer = timerValue;
+        StartCoroutine(StartGhostScaredTimer());
+    }
+
+    private IEnumerator StartGhostScaredTimer()
+    {
+        while (ghostScaredTimer > 0)
+        {
+            GhostScaredTimerText.text = $"Ghost Scared Timer: {ghostScaredTimer.ToString("00")}";
+            yield return new WaitForSeconds(1f);
+            ghostScaredTimer -= 1;
+        }
+
+        GhostScaredTimerText.text = "";
+    }
 }

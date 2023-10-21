@@ -8,6 +8,7 @@ TagManager:
   - Teleport
   - NormalPellet
   - PacStudent
+  - PowerPellet
   layers:
   - Default
   - TransparentFX

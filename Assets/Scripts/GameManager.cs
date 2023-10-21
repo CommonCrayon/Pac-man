@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -5,6 +6,8 @@ public class GameManager : MonoBehaviour
     public static GameManager instance;
 
     [SerializeField] private HudManager hudManager;
+    [SerializeField] private AudioController audioController;
+    [SerializeField] private GameObject[] Ghosts;
 
     public double Score = 0;
 
@@ -26,5 +29,39 @@ public class GameManager : MonoBehaviour
     {
         Score += value;
         hudManager.UpdateScore(Score.ToString());
+    }
+
+    public void PowerPelletActivate()
+    {
+        StartCoroutine(GhostAnimator());
+
+        audioController.SetBMToGhostScared();
+
+        hudManager.UpdateGhostScaredTimer(10);
+
+    }
+
+    private IEnumerator GhostAnimator()
+    {
+        foreach (var ghost in Ghosts)
+        {
+            ghost.GetComponent<Animator>().Play("CatScared");
+        }
+
+        yield return new WaitForSeconds(7f);
+
+        foreach (var ghost in Ghosts)
+        {
+            ghost.GetComponent<Animator>().Play("CatRecovering");
+        }
+
+        yield return new WaitForSeconds(3f);
+
+        foreach (var ghost in Ghosts)
+        {
+            ghost.GetComponent<Animator>().Play("Up");
+        }
+
+        audioController.SetBMToNormal();
     }
 }

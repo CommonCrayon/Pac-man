@@ -159,6 +159,12 @@ public class PacStudentController : MonoBehaviour
                 Destroy(hitInfo.collider.gameObject, 0.5f);
                 GameManager.instance.AddScore(10);
             }
+
+            else if (hitInfo.collider.CompareTag("PowerPellet"))
+            {
+                Destroy(hitInfo.collider.gameObject, 0.5f);
+                GameManager.instance.PowerPelletActivate();
+            }
         }
         return true;
     }
