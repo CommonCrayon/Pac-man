@@ -12712,7 +12712,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 41183318898307573, guid: 638300d1080f08a49802f61629ce077e, type: 3}
       propertyPath: m_RootOrder
-      value: 13
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 41183318898307573, guid: 638300d1080f08a49802f61629ce077e, type: 3}
       propertyPath: m_LocalPosition.x
@@ -15514,7 +15514,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &696562972
 PrefabInstance:
@@ -16072,6 +16072,59 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 9019174865684573895, guid: 5f1697e064607d84aaebe0492cb4cffd, type: 3}
   m_PrefabInstance: {fileID: 721023434}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &721895787
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 721895789}
+  - component: {fileID: 721895788}
+  m_Layer: 0
+  m_Name: TeleportTriggerRight
+  m_TagString: Teleport
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!65 &721895788
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 721895787}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 0.2}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!4 &721895789
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 721895787}
+  m_LocalRotation: {x: -0, y: -0, z: 0.7071068, w: 0.7071068}
+  m_LocalPosition: {x: 13.5, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 9
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
 --- !u!1001 &722202261
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -48813,7 +48866,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1133731986170495331, guid: 4d4166f22aeeff34a8337902d7f4b85f, type: 3}
       propertyPath: m_RootOrder
-      value: 11
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 1133731986170495331, guid: 4d4166f22aeeff34a8337902d7f4b85f, type: 3}
       propertyPath: m_LocalPosition.x
@@ -48874,7 +48927,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2154557823933144373, guid: 140142bb8d4f197478d6429ddf3e60e2, type: 3}
       propertyPath: m_RootOrder
-      value: 10
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 2154557823933144373, guid: 140142bb8d4f197478d6429ddf3e60e2, type: 3}
       propertyPath: m_LocalPosition.x
@@ -48996,7 +49049,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3713556443829093630, guid: 3ba91334426a65741a5576b716ab2f28, type: 3}
       propertyPath: m_RootOrder
-      value: 12
+      value: 14
       objectReference: {fileID: 0}
     - target: {fileID: 3713556443829093630, guid: 3ba91334426a65741a5576b716ab2f28, type: 3}
       propertyPath: m_LocalPosition.x
@@ -49057,7 +49110,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5671664291807617325, guid: 364bfe9ef39062d449b76075282cc4f1, type: 3}
       propertyPath: m_RootOrder
-      value: 9
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 5671664291807617325, guid: 364bfe9ef39062d449b76075282cc4f1, type: 3}
       propertyPath: m_LocalPosition.x
@@ -49104,3 +49157,56 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 364bfe9ef39062d449b76075282cc4f1, type: 3}
+--- !u!4 &7725236928043744909
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7725236928043744911}
+  m_LocalRotation: {x: -0, y: -0, z: 0.7071068, w: 0.7071068}
+  m_LocalPosition: {x: -13.5, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 8
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
+--- !u!1 &7725236928043744911
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7725236928043744909}
+  - component: {fileID: 7976224607286443392}
+  m_Layer: 0
+  m_Name: TeleportTriggerLeft
+  m_TagString: Teleport
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!65 &7976224607286443392
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7725236928043744911}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 0.2}
+  m_Center: {x: 0, y: 0, z: 0}

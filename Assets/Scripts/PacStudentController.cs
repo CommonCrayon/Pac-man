@@ -143,6 +143,16 @@ public class PacStudentController : MonoBehaviour
                 // Hit wall so return false
                 return false;
             }
+
+            else if (hitInfo.collider.CompareTag("Teleport"))
+            {
+                Vector3 newPosition = new Vector3(transform.position.x * -1, transform.position.y, transform.position.z);
+                transform.position = newPosition;
+
+                currentPosition = transform.position;
+                this.targetPosition = newPosition;
+                return true;
+            }
         }
         return true;
     }
