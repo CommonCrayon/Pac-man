@@ -7,6 +7,7 @@ TagManager:
   - Wall
   - Teleport
   - NormalPellet
+  - PacStudent
   layers:
   - Default
   - TransparentFX
