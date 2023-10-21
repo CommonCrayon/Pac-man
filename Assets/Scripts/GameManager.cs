@@ -1,15 +1,19 @@
 using System.Collections;
 using UnityEngine;
 
+
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
 
     [SerializeField] private HudManager hudManager;
+    [SerializeField] private PacStudentController PSController;
     [SerializeField] private AudioController audioController;
     [SerializeField] private GameObject[] Ghosts;
 
-    public double Score = 0;
+    private double Score = 0;
+    private int lives = 3;
+
 
 
     private void Awake()
@@ -63,5 +67,13 @@ public class GameManager : MonoBehaviour
         }
 
         audioController.SetBMToNormal();
+    }
+
+
+    public void KillPacStudent()
+    {
+        lives--;
+        PSController.Respawn();
+        hudManager.SetLives(lives);
     }
 }

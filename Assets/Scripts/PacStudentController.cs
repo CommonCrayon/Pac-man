@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PacStudentController : MonoBehaviour
 {
+    private Vector3 respawnPosition;
+
     private float lerpSpeed = 5f;
     private bool isLerping = false;
 
@@ -21,10 +23,14 @@ public class PacStudentController : MonoBehaviour
     [SerializeField] private AudioSource wallCollideAS;
     [SerializeField] private ParticleSystem wallCollidePS;
 
+    [SerializeField] private ParticleSystem deathPS;
+
     private void Start()
     {
         currentPosition = transform.position;
         targetPosition = currentPosition;
+
+        respawnPosition = transform.position;
 
         animator = GetComponent<Animator>();
 
@@ -82,6 +88,29 @@ public class PacStudentController : MonoBehaviour
                 StopMovingPacStudent();
             }
         }
+    }
+
+    public void Respawn()
+    {
+        animator.Play("PacStudentDeath");
+        deathPS.Emit(10000);
+
+        playerInput = Vector3.zero;
+        lastInput = Vector3.zero;
+
+        // Freeze for 1 second
+        StartCoroutine(FreezeForOneSecond());
+    }
+
+    private IEnumerator FreezeForOneSecond()
+    {
+        yield return new WaitForSeconds(1.0f);
+
+        transform.position = respawnPosition;
+        transform.rotation = Quaternion.Euler(0, 0, 0);
+
+        currentPosition = respawnPosition;
+        targetPosition = respawnPosition;
     }
 
 

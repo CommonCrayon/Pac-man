@@ -8459,13 +8459,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hudManager: {fileID: 1356850395}
+  PSController: {fileID: 1838645096}
   audioController: {fileID: 1756739625}
   Ghosts:
   - {fileID: 191202199}
   - {fileID: 468845391}
   - {fileID: 1028396461}
   - {fileID: 1669885739}
-  Score: 0
 --- !u!1001 &357969239
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -42380,6 +42380,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1341235780038453749, guid: fd8d748ce3942074589229dc0ba8421d, type: 3}
   m_PrefabInstance: {fileID: 1837172731}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1838645096 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8726546492981055641, guid: 638300d1080f08a49802f61629ce077e, type: 3}
+  m_PrefabInstance: {fileID: 568602970}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f50ff6ed52590e140b8f3438ca0e2436, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1845748861
 PrefabInstance:
   m_ObjectHideFlags: 0
