@@ -40,6 +40,11 @@ public class HudManager : MonoBehaviour
         }
     }
 
+    public void UpdateScore(string value)
+    {
+        ScoreText.text = $"Score: {value}";
+    }
+
     public void OnExitButtonClicked()
     {
         SceneManager.LoadScene(0);

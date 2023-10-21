@@ -153,6 +153,12 @@ public class PacStudentController : MonoBehaviour
                 this.targetPosition = newPosition;
                 return true;
             }
+
+            else if (hitInfo.collider.CompareTag("NormalPellet"))
+            {
+                Destroy(hitInfo.collider.gameObject, 0.5f);
+                GameManager.instance.AddScore(10);
+            }
         }
         return true;
     }

@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Wall
   - Teleport
+  - NormalPellet
   layers:
   - Default
   - TransparentFX
