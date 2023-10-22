@@ -3,6 +3,7 @@ using UnityEngine;
 public class AudioController : MonoBehaviour
 {
     [SerializeField] private AudioClip BMNormalAudioClip;
+    [SerializeField] private AudioClip BMGhostScared;
     private AudioSource audioSource;
 
     private void Start()
@@ -19,5 +20,18 @@ public class AudioController : MonoBehaviour
             audioSource.loop = true;
             audioSource.Play();
         }
+    }
+
+    public void SetBMToGhostScared()
+    {
+        audioSource.clip = BMGhostScared;
+        audioSource.Play();
+    }
+
+    public void SetBMToNormal()
+    {
+        audioSource.clip = BMNormalAudioClip;
+        audioSource.loop = true;
+        audioSource.Play();
     }
 }

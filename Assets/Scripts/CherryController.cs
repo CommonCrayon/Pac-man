@@ -65,12 +65,17 @@ public class CherryController : MonoBehaviour
 
         while (elapsedTime < spawnInterval)
         {
+            if (instantiatedCherry == null) yield break;
+
             instantiatedCherry.transform.position = Vector3.Lerp(initialPosition, targetPosition, elapsedTime / spawnInterval);
             elapsedTime += Time.deltaTime;
             yield return null;
         }
 
-        Destroy(instantiatedCherry);
+        if (instantiatedCherry != null)
+        {
+            Destroy(instantiatedCherry);
+        }
     }
 
 }
