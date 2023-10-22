@@ -58,7 +58,7 @@ public class PacStudentController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (!isLerping)
+        if (!isLerping && playerInput != Vector3.zero)
         {
             // Calculate the new target position
             targetPosition = GetTargetPosition(currentPosition + playerInput);
