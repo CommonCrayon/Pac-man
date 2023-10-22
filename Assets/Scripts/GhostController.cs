@@ -17,6 +17,8 @@ public class GhostController : MonoBehaviour
     private Vector3 currentPosition;
     private Vector3 previousDirection;
 
+    private Vector3 RespawnLocation;
+
 
     // MOVEMENT ====================================================================================
     private void Start()
@@ -24,11 +26,13 @@ public class GhostController : MonoBehaviour
         currentPosition = transform.position;
         targetPosition = currentPosition;
         previousDirection = Vector3.zero;
+
+        RespawnLocation = currentPosition;
     }
 
     private void FixedUpdate()
     {
-        if (!isLerping)
+        if (!isLerping && !isDead)
         {
             // Calculate the new target position
             List<Vector3> possibleDirections = new List<Vector3>();
@@ -109,6 +113,32 @@ public class GhostController : MonoBehaviour
         return true;
     }
 
+    IEnumerator MoveToRespawnLocation()
+    {
+        float elapsedTime = 0f;
+        Vector3 initialPosition = transform.position;
+
+        while (elapsedTime < 3f)
+        {
+            // Calculate the interpolation factor (t) based on the elapsed time and duration.
+            float t = elapsedTime / 3f;
+
+            // Lerp the position gradually over time.
+            transform.position = Vector3.Lerp(initialPosition, RespawnLocation, t);
+
+            elapsedTime += Time.deltaTime;
+
+            yield return null;
+        }
+
+        // Ensure the final position is the RespawnLocation.
+        transform.position = RespawnLocation;
+
+        currentPosition = transform.position;
+        targetPosition = currentPosition;
+        previousDirection = Vector3.zero;
+    }
+
     // MOVEMENT ====================================================================================
 
 
@@ -122,6 +152,7 @@ public class GhostController : MonoBehaviour
                 isDead = true;
                 GameManager.instance.AddScore(300);
                 StartCoroutine(GhostRecover());
+                StartCoroutine(MoveToRespawnLocation());
             }
             else
             {
@@ -159,5 +190,7 @@ public class GhostController : MonoBehaviour
         yield return new WaitForSeconds(2);
 
         animator.Play("Up");
+
+        isDead = false;
     }
 }
