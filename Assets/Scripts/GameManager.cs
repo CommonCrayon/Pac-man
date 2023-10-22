@@ -9,12 +9,12 @@ public class GameManager : MonoBehaviour
     [SerializeField] private HudManager hudManager;
     [SerializeField] private PacStudentController PSController;
     [SerializeField] private AudioController audioController;
-    [SerializeField] private GameObject[] Ghosts;
+    [SerializeField] private GhostController[] Ghosts;
 
     private double Score = 0;
     private int lives = 3;
 
-
+    public bool GhostKillable = false;
 
     private void Awake()
     {
@@ -37,36 +37,37 @@ public class GameManager : MonoBehaviour
 
     public void PowerPelletActivate()
     {
+        GhostKillable = true;
+
         StartCoroutine(GhostAnimator());
-
-        audioController.SetBMToGhostScared();
-
-        hudManager.UpdateGhostScaredTimer(10);
-
     }
 
     private IEnumerator GhostAnimator()
     {
+        audioController.SetBMToGhostScared();
+        hudManager.UpdateGhostScaredTimer(10);
+
         foreach (var ghost in Ghosts)
         {
-            ghost.GetComponent<Animator>().Play("CatScared");
+            ghost.PlayGhostScared();
         }
 
         yield return new WaitForSeconds(7f);
 
         foreach (var ghost in Ghosts)
         {
-            ghost.GetComponent<Animator>().Play("CatRecovering");
+            ghost.PlayGhostRecovering();
         }
 
         yield return new WaitForSeconds(3f);
 
         foreach (var ghost in Ghosts)
         {
-            ghost.GetComponent<Animator>().Play("Up");
+            ghost.PlayGhostNormal();
         }
 
         audioController.SetBMToNormal();
+        GhostKillable = false;
     }
 
 
