@@ -27,6 +27,9 @@ public class GameManager : MonoBehaviour
             // If an instance already exists, destroy the new one to maintain the singleton pattern.
             Destroy(gameObject);
         }
+
+        // Stops timescale to do this countdown
+        StartCoroutine(hudManager.Countdown());
     }
 
     public void AddScore(double value)
