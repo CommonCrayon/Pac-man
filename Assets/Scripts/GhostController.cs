@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
+using static UnityEngine.GraphicsBuffer;
 
 public class GhostController : MonoBehaviour
 {
@@ -18,6 +20,7 @@ public class GhostController : MonoBehaviour
 
     [SerializeField] private Animator animator;
     private bool isDead = false;
+    private bool wasDead = false;
 
     private float lerpSpeed = 5f;
     private bool isLerping = false;
@@ -247,13 +250,11 @@ public class GhostController : MonoBehaviour
 
 
 
-
     IEnumerator LerpToTarget(Vector3 target)
     {
         isLerping = true;
 
-
-        while (Vector3.Distance(transform.position, target) > 0.1)
+        while (Vector3.Distance(transform.position, target) > 0.1 && !isDead)
         {
             // Lerp towards the target position
             transform.position = Vector3.Lerp(currentPosition, target, lerpSpeed * Time.deltaTime);
@@ -262,9 +263,10 @@ public class GhostController : MonoBehaviour
             yield return null;
         }
 
-
         isLerping = false;
     }
+
+
 
     private Vector3 GetTargetPosition(Vector3 newPosition)
     {
@@ -272,6 +274,8 @@ public class GhostController : MonoBehaviour
         float y = Mathf.Round(newPosition.y / 1);
         return new Vector3(x, y, newPosition.z);
     }
+
+
 
     private bool ValidateTargetPosition(Vector3 targetPosition)
     {
@@ -289,46 +293,22 @@ public class GhostController : MonoBehaviour
         return true;
     }
 
-    IEnumerator MoveToRespawnLocation()
-    {
-        float elapsedTime = 0f;
-        Vector3 initialPosition = transform.position;
-
-        while (elapsedTime < 3f)
-        {
-            // Calculate the interpolation factor (t) based on the elapsed time and duration.
-            float t = elapsedTime / 3f;
-
-            // Lerp the position gradually over time.
-            transform.position = Vector3.Lerp(initialPosition, RespawnLocation, t);
-
-            elapsedTime += Time.deltaTime;
-
-            yield return null;
-        }
-
-        // Ensure the final position is the RespawnLocation.
-        transform.position = RespawnLocation;
-
-        currentPosition = transform.position;
-        targetPosition = currentPosition;
-        previousDirection = Vector3.zero;
-    }
 
     // MOVEMENT ====================================================================================
 
 
     private void OnTriggerEnter(Collider other)
     {
-
         if (other.CompareTag("PacStudent"))
         {
-            if (GameManager.instance.GhostKillable)
+            if (GameManager.instance.GhostKillable && !isDead)
             {
                 isDead = true;
+                wasDead = true;
                 GameManager.instance.AddScore(300);
+
+                StartCoroutine(LerpDeadGhost(transform.position));
                 StartCoroutine(GhostRecover());
-                StartCoroutine(MoveToRespawnLocation());
             }
             else
             {
@@ -339,33 +319,56 @@ public class GhostController : MonoBehaviour
 
     public void PlayGhostScared()
     {
-        animator.Play("CatScared");
+        if (!wasDead)
+            animator.Play("CatScared");
     }
 
     public void PlayGhostRecovering()
     {
-        if (!isDead)
+        if (!wasDead)
             animator.Play("CatRecovering");
     }
 
     public void PlayGhostNormal()
     {
-        if (!isDead)
+        if (!wasDead)
             animator.Play("Up");
+
+        wasDead = false;
     }
 
     private IEnumerator GhostRecover()
     {
         animator.Play("CatDead");
 
+
         yield return new WaitForSeconds(3);
 
         animator.Play("CatRecovering");
+
+        transform.position = RespawnLocation;
+
+        currentPosition = transform.position;
+        targetPosition = currentPosition;
+        previousDirection = Vector3.zero;
 
         yield return new WaitForSeconds(2);
 
         animator.Play("Up");
 
         isDead = false;
+    }
+
+    private IEnumerator LerpDeadGhost(Vector3 startPosition)
+    {
+        float elapsedTime = 0.0f;
+
+        while (elapsedTime < 3f)
+        {
+            transform.position = Vector3.Lerp(startPosition, RespawnLocation, elapsedTime / 3f);
+
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
     }
 }
