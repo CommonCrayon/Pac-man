@@ -1,6 +1,6 @@
 using System.Collections;
 using UnityEngine;
-
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -77,7 +77,52 @@ public class GameManager : MonoBehaviour
     public void KillPacStudent()
     {
         lives--;
-        PSController.Respawn();
-        hudManager.SetLives(lives);
+
+        if (lives == 0)
+        {
+            GameOver();
+        }
+        else
+        {
+            PSController.Respawn();
+            hudManager.SetLives(lives);
+        }
+    }
+
+    private void GameOver()
+    {
+        Time.timeScale = 0;
+        float gameTimer = hudManager.GameOver();
+
+        int hours = Mathf.FloorToInt(gameTimer / 3600);
+        int minutes = Mathf.FloorToInt((gameTimer % 3600) / 60);
+        int seconds = Mathf.FloorToInt(gameTimer % 60);
+
+        string timerText = string.Format("{0:00}:{1:00}:{2:00}", hours, minutes, seconds);
+
+        if (Score > double.Parse(PlayerPrefs.GetString("HighScore", "0")))
+        {
+            PlayerPrefs.SetString("HighScore", Score.ToString());
+            PlayerPrefs.SetString("HighTime", timerText.ToString());
+        }
+        else if (Score == double.Parse(PlayerPrefs.GetString("HighScore", "0")))
+        {
+            string highTime = PlayerPrefs.GetString("HighTime", "00:00:00");
+            if (string.Compare(timerText, highTime) < 0)
+            {
+                PlayerPrefs.SetString("HighScore", Score.ToString());
+                PlayerPrefs.SetString("HighTime", timerText);
+            }
+        }
+
+        StartCoroutine(GoToStartScene());
+    }
+
+    private IEnumerator GoToStartScene()
+    {
+        yield return new WaitForSecondsRealtime(3);
+
+        SceneManager.LoadScene(0);
+        Time.timeScale = 1;
     }
 }

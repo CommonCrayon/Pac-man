@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -11,6 +12,7 @@ public class HudManager : MonoBehaviour
     [SerializeField] private TMP_Text GameTimerText;
     [SerializeField] private TMP_Text GhostScaredTimerText;
     [SerializeField] private TMP_Text CountdownText;
+    [SerializeField] private TMP_Text GameOverText;
 
     private float gameTimer = 0;
     private float ghostScaredTimer = 0;
@@ -103,5 +105,10 @@ public class HudManager : MonoBehaviour
         GhostScaredTimerText.text = "";
     }
 
+    public float GameOver()
+    {
+        GameOverText.enabled = true;
 
+        return gameTimer;
+    }
 }
