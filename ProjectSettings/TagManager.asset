@@ -9,6 +9,7 @@ TagManager:
   - NormalPellet
   - PacStudent
   - PowerPellet
+  - GhostBlock
   layers:
   - Default
   - TransparentFX
