@@ -5,16 +5,18 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
+    public GameObject PacStudent;
 
     [SerializeField] private HudManager hudManager;
     [SerializeField] private PacStudentController PSController;
     [SerializeField] private AudioController audioController;
     [SerializeField] private GhostController[] Ghosts;
 
+
     private double Score = 0;
     private int lives = 3;
 
-    public bool GhostKillable = false;
+    [HideInInspector] public bool GhostKillable = false;
 
     private void Awake()
     {
@@ -30,6 +32,15 @@ public class GameManager : MonoBehaviour
 
         // Stops timescale to do this countdown
         StartCoroutine(hudManager.Countdown());
+    }
+
+    private void FixedUpdate()
+    {
+        // Finish the game if all pellets are collected
+        if (GameObject.FindGameObjectWithTag("NormalPellet") == null && GameObject.FindGameObjectWithTag("PowerPellet") == null)
+        {
+            GameOver();
+        }
     }
 
     public void AddScore(double value)
