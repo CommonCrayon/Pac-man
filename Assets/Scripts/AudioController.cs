@@ -4,6 +4,7 @@ public class AudioController : MonoBehaviour
 {
     [SerializeField] private AudioClip BMNormalAudioClip;
     [SerializeField] private AudioClip BMGhostScared;
+    [SerializeField] private AudioClip BMDead;
     private AudioSource audioSource;
 
     private void Start()
@@ -24,14 +25,33 @@ public class AudioController : MonoBehaviour
 
     public void SetBMToGhostScared()
     {
-        audioSource.clip = BMGhostScared;
-        audioSource.Play();
+        // Check if the audio source is not playing the same clip.
+        if (audioSource.clip != BMGhostScared)
+        {
+            audioSource.clip = BMGhostScared;
+            audioSource.Play();
+        }
     }
 
     public void SetBMToNormal()
     {
-        audioSource.clip = BMNormalAudioClip;
-        audioSource.loop = true;
-        audioSource.Play();
+        // Check if the audio source is not playing the same clip.
+        if (audioSource.clip != BMNormalAudioClip)
+        {
+            audioSource.clip = BMNormalAudioClip;
+            audioSource.loop = true;
+            audioSource.Play();
+        }
+    }
+
+    public void SetBMToDead()
+    {
+        // Check if the audio source is not playing the same clip.
+        if (audioSource.clip != BMDead)
+        {
+            audioSource.clip = BMDead;
+            audioSource.loop = true;
+            audioSource.Play();
+        }
     }
 }

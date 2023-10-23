@@ -16,7 +16,7 @@ public class GameManager : MonoBehaviour
     private double Score = 0;
     private int lives = 3;
 
-    [HideInInspector] public bool GhostKillable = false;
+    [HideInInspector] public bool GhostScaredState = false;
 
     private void Awake()
     {
@@ -51,9 +51,19 @@ public class GameManager : MonoBehaviour
 
     public void PowerPelletActivate()
     {
-        GhostKillable = true;
+        GhostScaredState = true;
 
         StartCoroutine(GhostAnimator());
+    }
+
+    public IEnumerator PlayBMDeadMusic()
+    {
+        audioController.SetBMToDead();
+
+        yield return new WaitForSeconds(5);
+
+        audioController.SetBMToGhostScared();
+
     }
 
     private IEnumerator GhostAnimator()
@@ -81,7 +91,7 @@ public class GameManager : MonoBehaviour
         }
 
         audioController.SetBMToNormal();
-        GhostKillable = false;
+        GhostScaredState = false;
     }
 
 

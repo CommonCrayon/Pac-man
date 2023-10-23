@@ -191,7 +191,7 @@ public class PacStudentController : MonoBehaviour
             {
                 Destroy(hitInfo.collider.gameObject, 0.5f);
 
-                eatAS.Play(1);
+                eatAS.PlayDelayed(0.5f);
                 GameManager.instance.AddScore(10);
             }
 
@@ -199,7 +199,7 @@ public class PacStudentController : MonoBehaviour
             {
                 Destroy(hitInfo.collider.gameObject, 0.5f);
 
-                eatAS.Play(1);
+                eatAS.PlayDelayed(0.5f);
                 GameManager.instance.PowerPelletActivate();
             }
         }

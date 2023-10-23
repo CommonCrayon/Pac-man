@@ -1,8 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UIElements;
-using static UnityEngine.GraphicsBuffer;
 
 public class GhostController : MonoBehaviour
 {
@@ -124,7 +122,7 @@ public class GhostController : MonoBehaviour
         }
 
         // Ghost One Goes to the Furthest possible direction of the player.
-        else if (ghostNumber == Ghost.One || GameManager.instance.GhostKillable) // If ghost scared/recovering use Ghost 1 behaviour
+        else if (ghostNumber == Ghost.One || GameManager.instance.GhostScaredState) // If ghost scared/recovering use Ghost 1 behaviour
         {
             Vector3 furthestTarget = possibleDirections[0];
 
@@ -301,12 +299,13 @@ public class GhostController : MonoBehaviour
     {
         if (other.CompareTag("PacStudent"))
         {
-            if (GameManager.instance.GhostKillable && !isDead)
+            if (GameManager.instance.GhostScaredState && !isDead)
             {
                 isDead = true;
                 wasDead = true;
                 GameManager.instance.AddScore(300);
 
+                StartCoroutine(GameManager.instance.PlayBMDeadMusic());
                 StartCoroutine(LerpDeadGhost(transform.position));
                 StartCoroutine(GhostRecover());
             }

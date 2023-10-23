@@ -47770,6 +47770,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4607162021337919465, guid: 10d1ea8a417b62442959cb6696da1c25, type: 3}
+      propertyPath: m_BackGroundColor.b
+      value: 0.6431373
+      objectReference: {fileID: 0}
+    - target: {fileID: 4607162021337919465, guid: 10d1ea8a417b62442959cb6696da1c25, type: 3}
+      propertyPath: m_BackGroundColor.g
+      value: 0.21568628
+      objectReference: {fileID: 0}
+    - target: {fileID: 4607162021337919465, guid: 10d1ea8a417b62442959cb6696da1c25, type: 3}
+      propertyPath: m_BackGroundColor.r
+      value: 0.29411766
+      objectReference: {fileID: 0}
     - target: {fileID: 4607162021337919467, guid: 10d1ea8a417b62442959cb6696da1c25, type: 3}
       propertyPath: m_Name
       value: Main Camera
@@ -47918,6 +47930,54 @@ PrefabInstance:
     - target: {fileID: 4722610332330823486, guid: 3f52a0667b52a904c813ca1175ada80b, type: 3}
       propertyPath: m_Name
       value: HUD
+      objectReference: {fileID: 0}
+    - target: {fileID: 4722610332606154324, guid: 3f52a0667b52a904c813ca1175ada80b, type: 3}
+      propertyPath: m_fontColor.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4722610332606154324, guid: 3f52a0667b52a904c813ca1175ada80b, type: 3}
+      propertyPath: m_fontColor.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4722610332606154324, guid: 3f52a0667b52a904c813ca1175ada80b, type: 3}
+      propertyPath: m_fontColor.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4722610332606154324, guid: 3f52a0667b52a904c813ca1175ada80b, type: 3}
+      propertyPath: m_fontColor32.rgba
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 4722610332609516495, guid: 3f52a0667b52a904c813ca1175ada80b, type: 3}
+      propertyPath: m_fontColor.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4722610332609516495, guid: 3f52a0667b52a904c813ca1175ada80b, type: 3}
+      propertyPath: m_fontColor.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4722610332609516495, guid: 3f52a0667b52a904c813ca1175ada80b, type: 3}
+      propertyPath: m_fontColor.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4722610332609516495, guid: 3f52a0667b52a904c813ca1175ada80b, type: 3}
+      propertyPath: m_fontColor32.rgba
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 4722610332733412414, guid: 3f52a0667b52a904c813ca1175ada80b, type: 3}
+      propertyPath: m_fontColor.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4722610332733412414, guid: 3f52a0667b52a904c813ca1175ada80b, type: 3}
+      propertyPath: m_fontColor.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4722610332733412414, guid: 3f52a0667b52a904c813ca1175ada80b, type: 3}
+      propertyPath: m_fontColor.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4722610332733412414, guid: 3f52a0667b52a904c813ca1175ada80b, type: 3}
+      propertyPath: m_fontColor32.rgba
+      value: 4294967295
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
