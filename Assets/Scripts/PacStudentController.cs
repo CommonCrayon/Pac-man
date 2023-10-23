@@ -23,7 +23,10 @@ public class PacStudentController : MonoBehaviour
     [SerializeField] private AudioSource wallCollideAS;
     [SerializeField] private ParticleSystem wallCollidePS;
 
+    [SerializeField] private AudioSource deathAS;
     [SerializeField] private ParticleSystem deathPS;
+
+    [SerializeField] private AudioSource eatAS;
 
     private void Start()
     {
@@ -58,7 +61,7 @@ public class PacStudentController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (!isLerping)
+        if (!isLerping && playerInput != Vector3.zero)
         {
             // Calculate the new target position
             targetPosition = GetTargetPosition(currentPosition + playerInput);
@@ -94,6 +97,7 @@ public class PacStudentController : MonoBehaviour
     {
         animator.Play("PacStudentDeath");
         deathPS.Emit(10000);
+        deathAS.Play();
 
         playerInput = Vector3.zero;
         lastInput = Vector3.zero;
@@ -186,12 +190,16 @@ public class PacStudentController : MonoBehaviour
             else if (hitInfo.collider.CompareTag("NormalPellet"))
             {
                 Destroy(hitInfo.collider.gameObject, 0.5f);
+
+                eatAS.PlayDelayed(0.5f);
                 GameManager.instance.AddScore(10);
             }
 
             else if (hitInfo.collider.CompareTag("PowerPellet"))
             {
                 Destroy(hitInfo.collider.gameObject, 0.5f);
+
+                eatAS.PlayDelayed(0.5f);
                 GameManager.instance.PowerPelletActivate();
             }
         }
